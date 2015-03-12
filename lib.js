@@ -1,27 +1,11 @@
 Bindings = {};
 
-Bindings.bind = function(tpl) {
+Bindings.bind = function(tpl, options) {
 
   var template = Template[tpl];
   var deps = new Tracker.Dependency;
-
-  template.rendered = function() {
-    var tpl = this;
-    tpl.autorun(function() {
-      deps.depend();
-      for (var k in tpl) {
-        if (!tpl[k] || !tpl[k].get) continue;
-        var els = tpl.$("[data-bind='" + k + "']");
-        if (!els.length) continue;
-        els.each(function() {
-          var prop = "text";
-          if (["SELECT", "INPUT", "TEXTAREA"].indexOf(this.tagName) > -1) prop = "val";
-          if ($(this)[prop]() === tpl[k].get()) return;
-          $(this)[prop](tpl[k].get());
-        });
-      }
-    });
-  }
+  options = options || {};
+  options.reactive = options.reactive || true;
 
   var bind = function(e, tpl) {
     var element = $(e.currentTarget);
@@ -40,5 +24,30 @@ Bindings.bind = function(tpl) {
     "change [data-bind]": bind,
     "input [data-bind]": bind
   });
+
+  if (!options.reactive) return;
+  template.rendered = function() {
+    var tpl = this;
+    tpl.autorun(function() {
+      deps.depend();
+      Bindings._renderVars(tpl);
+    });
+  }
+
+}
+
+Bindings._renderVars = function(tpl) {
+
+  for (var k in tpl) {
+    if (!tpl[k] || !tpl[k].get) continue;
+    var els = tpl.$("[data-bind='" + k + "']");
+    if (!els.length) continue;
+    els.each(function() {
+      var prop = "text";
+      if (["SELECT", "INPUT", "TEXTAREA"].indexOf(this.tagName) > -1) prop = "val";
+      if ($(this)[prop]() === tpl[k].get()) return;
+      $(this)[prop](tpl[k].get());
+    });
+  }
 
 }
