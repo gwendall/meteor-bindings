@@ -2,7 +2,7 @@ Package.describe({
   name: "gwendall:bindings",
   summary: "Easy two-way data-binding with Blaze",
   git: "https://github.com/gwendall/meteor-bindings.git",
-  version: "0.1.3"
+  version: "0.1.4"
 });
 
 Package.onUse(function (api, where) {
