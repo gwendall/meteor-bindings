@@ -33,5 +33,5 @@ Methods
 **Bindings._renderVar([template_instance], [property])**  
 Updates the DOM elements bound to a given reactiveVar of the provided template instance.
 
-**Bindings._renderVars([template_instance])**
+**Bindings._renderVars([template_instance])**  
 Updates the DOM elements bound to all the reactiveVars of the provided template instance.
