@@ -25,7 +25,7 @@ Options
 
 **Bindings.reactive = Boolean** (true by default)  
 Whether or not the DOM should be updated reactively.  
-Set it to false if you want to trigger the DOM update yourself with a given event, or just use it to bind inputs to reactive-vars.
+Set it to false if you want to only use the package to bind inputs to reactive-vars, or trigger the DOM update yourself with one of the methods below.
 
 Methods
 ----------
