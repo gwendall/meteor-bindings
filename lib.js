@@ -1,40 +1,4 @@
-Bindings = {};
-
-Bindings.bind = function(tpl, options) {
-
-  var template = Template[tpl];
-  var deps = new Tracker.Dependency;
-  options = options || {};
-  options.reactive = options.reactive || true;
-
-  var bind = function(e, tpl) {
-    var element = $(e.currentTarget);
-    var bind = element.data("bind");
-    var value = element.val();
-    if (!bind) return;
-    if (tpl[bind] && tpl[bind].set) {
-      tpl[bind].set(value);
-    } else {
-      tpl[bind] = new ReactiveVar(value);
-    }
-    deps.changed();
-  };
-
-  template.events({
-    "change [data-bind]": bind,
-    "input [data-bind]": bind
-  });
-
-  if (!options.reactive) return;
-  template.rendered = function() {
-    var tpl = this;
-    tpl.autorun(function() {
-      deps.depend();
-      Bindings._renderVars(tpl);
-    });
-  }
-
-}
+Bindings = { reactive: true };
 
 Bindings._renderVars = function(tpl) {
 
@@ -51,3 +15,22 @@ Bindings._renderVars = function(tpl) {
   }
 
 }
+
+var bind = function(e, data, tpl) {
+  var element = $(e.currentTarget);
+  var bind = element.data("bind");
+  var value = element.val();
+  if (!bind) return;
+  if (tpl[bind] && tpl[bind].set) {
+    tpl[bind].set(value);
+  } else {
+    tpl[bind] = new ReactiveVar(value);
+  }
+  if (!Bindings.reactive) return;
+  Bindings._renderVars(tpl);
+};
+
+Template.body.events({
+  "change [data-bind]": bind,
+  "input [data-bind]": bind
+});
