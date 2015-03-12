@@ -10,7 +10,7 @@ Bindings.bind = function(tpl) {
     tpl.autorun(function() {
       deps.depend();
       for (var k in tpl) {
-        if (!tpl[k].get) continue;
+        if (!tpl[k] || !tpl[k].get) continue;
         var els = tpl.$("[data-bind='" + k + "']");
         if (!els.length) continue;
         els.each(function() {
