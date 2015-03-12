@@ -21,7 +21,8 @@ Bindings._renderVar = function(tpl, k) {
 var bind = function(e, data, tpl) {
   var element = $(e.currentTarget);
   var bind = element.data("bind");
-  var value = element.val();
+  var prop = element.is("[contenteditable]") ? "text" : "val";
+  var value = element[prop]();
   if (!bind) return;
   if (tpl[bind] && tpl[bind].set) {
     tpl[bind].set(value);
