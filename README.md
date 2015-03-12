@@ -27,4 +27,5 @@ Options
 **reactive: Boolean**  
 Whether or not the DOM should be updated reactively (true by default).  
 If set to true, the package uses the templated.created method to track changes of the bound inputs and update the DOM.  
-Hence, if you want to use your own template.created method, or trigger the DOM update through a given event, just call Bindings._renderVars(tplInstance) whenever you want to re-render the bound DOM elements.
+Set it to false if you want to use your own template.created method, trigger the DOM update yourself with a given event, or just use it to bind inputs to reactive-vars.  
+You can then manually call the Bindings._renderVars([template_instance]) method whenever you want to re-render the bound DOM elements.
