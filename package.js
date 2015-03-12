@@ -8,10 +8,10 @@ Package.describe({
 Package.onUse(function (api, where) {
 
   api.use([
-    "jquery",
-    "tracker",
-    "templating",
-    "reactive-var"
+    "jquery@1.11.3",
+    "reactive-var@1.0.4",
+    "templating@1.0.11",
+    "tracker@1.0.5"
   ], "client");
 
   api.addFiles([
