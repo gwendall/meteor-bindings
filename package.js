@@ -1,10 +1,11 @@
 Package.describe({
   name: "gwendall:bindings",
   summary: "Easy two-way data-binding with Blaze",
+  git: "https://github.com/gwendall/meteor-bindings.git",
   version: "0.1.0"
 });
 
-Package.on_use(function (api, where) {
+Package.onUse(function (api, where) {
 
   api.use([
     "jquery",
@@ -13,7 +14,7 @@ Package.on_use(function (api, where) {
     "reactive-var"
   ], "client");
 
-  api.add_files([
+  api.addFiles([
     "lib.js",
   ], "client");
 
