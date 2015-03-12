@@ -1,7 +1,7 @@
 Meteor Bindings
 =================
 
-Easy two-way data-binding with Blaze
+Easy two-way databinding with Blaze
 
 [Demo](https://bindings.meteor.com)  
 [Demo code](https://github.com/gwendall/meteor-bindings-demo)  
